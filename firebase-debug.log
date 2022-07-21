@@ -1,0 +1,61 @@
+[debug] [2022-07-21T05:22:18.776Z] ----------------------------------------------------------------------
+[debug] [2022-07-21T05:22:18.778Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\willi\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
+[debug] [2022-07-21T05:22:18.778Z] CLI Version:   11.3.0
+[debug] [2022-07-21T05:22:18.778Z] Platform:      win32
+[debug] [2022-07-21T05:22:18.779Z] Node Version:  v16.16.0
+[debug] [2022-07-21T05:22:18.779Z] Time:          Thu Jul 21 2022 12:22:18 GMT+0700 (Western Indonesia Time)
+[debug] [2022-07-21T05:22:18.779Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-07-21T05:22:18.844Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-07-21T05:22:18.845Z] > authorizing via signed-in user (william.gumdamx@gmail.com)
+[debug] [2022-07-21T05:22:18.946Z] java version "18.0.2" 2022-07-19
+Java(TM) SE Runtime Environment (build 18.0.2+9-61)
+Java HotSpot(TM) 64-Bit Server VM (build 18.0.2+9-61, mixed mode, sharing)
+
+[debug] [2022-07-21T05:22:18.966Z] Parsed Java major version: 18
+[info] i  emulators: Starting emulators: auth, database, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, database, storage"}}
+[debug] [2022-07-21T05:22:18.990Z] [hub] writing locator at C:\Users\willi\AppData\Local\Temp\hub-basic-chat-app-3a67b.json
+[debug] [2022-07-21T05:22:18.999Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/basic-chat-app-3a67b [none]
+[debug] [2022-07-21T05:22:19.567Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/basic-chat-app-3a67b 200
+[debug] [2022-07-21T05:22:19.567Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/basic-chat-app-3a67b {"projectId":"basic-chat-app-3a67b","projectNumber":"602941703540","displayName":"basic-chat-app","name":"projects/basic-chat-app-3a67b","resources":{"hostingSite":"basic-chat-app-3a67b","realtimeDatabaseInstance":"basic-chat-app-3a67b-default-rtdb","storageBucket":"basic-chat-app-3a67b.appspot.com","locationId":"asia-southeast1"},"state":"ACTIVE"}
+[debug] [2022-07-21T05:22:19.568Z] database rules config:  []
+[warn] !  database: Did not find a Realtime Database rules file specified in a firebase.json config file. The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration. {"metadata":{"emulator":{"name":"database"},"message":"Did not find a Realtime Database rules file specified in a firebase.json config file. The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration."}}
+[debug] [2022-07-21T05:22:19.570Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2022-07-21T05:22:19.570Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-07-21T05:22:19.571Z] Ignoring unsupported arg: rules {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: rules"}}
+[debug] [2022-07-21T05:22:19.571Z] Starting Database Emulator with command {"binary":"java","args":["-Duser.language=en","-jar","C:\\Users\\willi\\.cache\\firebase\\emulators\\firebase-database-emulator-v4.8.0.jar","--host","localhost","--port",9000],"optionalArgs":["port","host","functions_emulator_port","functions_emulator_host"],"joinArgs":false} {"metadata":{"emulator":{"name":"database"},"message":"Starting Database Emulator with command {\"binary\":\"java\",\"args\":[\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\willi\\\\.cache\\\\firebase\\\\emulators\\\\firebase-database-emulator-v4.8.0.jar\",\"--host\",\"localhost\",\"--port\",9000],\"optionalArgs\":[\"port\",\"host\",\"functions_emulator_port\",\"functions_emulator_host\"],\"joinArgs\":false}"}}
+[info] i  database: Database Emulator logging to database-debug.log {"metadata":{"emulator":{"name":"database"},"message":"Database Emulator logging to \u001b[1mdatabase-debug.log\u001b[22m"}}
+[debug] [2022-07-21T05:22:28.104Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2022-07-21T05:22:28.936Z] Temp file directory for storage emulator: C:\Users\willi\AppData\Local\Temp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: C:\\Users\\willi\\AppData\\Local\\Temp/firebase/storage/blobs"}}
+[info] i  ui: downloading ui-v1.8.1.zip... {"metadata":{"emulator":{"name":"ui"},"message":"downloading ui-v1.8.1.zip..."}}
+[debug] [2022-07-21T05:22:28.948Z] >>> [apiv2][query] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.8.1.zip 
+[debug] [2022-07-21T05:22:29.237Z] <<< [apiv2][status] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.8.1.zip 200
+[debug] [2022-07-21T05:22:29.237Z] <<< [apiv2][body] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.8.1.zip [stream]
+[info] i  ui: Removing outdated emulator files: ui-v1.6.0 {"metadata":{"emulator":{"name":"ui"},"message":"Removing outdated emulator files: ui-v1.6.0"}}
+[info] i  ui: Removing outdated emulator files: ui-v1.6.0.zip {"metadata":{"emulator":{"name":"ui"},"message":"Removing outdated emulator files: ui-v1.6.0.zip"}}
+[debug] [2022-07-21T05:22:29.832Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-07-21T05:22:29.833Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2022-07-21T05:22:29.833Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\willi\\.cache\\firebase\\emulators\\ui-v1.8.1\\server\\server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\willi\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.8.1\\\\server\\\\server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2022-07-21T05:22:29.960Z] Web / API server started at localhost:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at localhost:4000\n"}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://localhost:4000                │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI            │
+├────────────────┼────────────────┼────────────────────────────────┤
+│ Authentication │ localhost:9099 │ http://localhost:4000/auth     │
+├────────────────┼────────────────┼────────────────────────────────┤
+│ Database       │ localhost:9000 │ http://localhost:4000/database │
+├────────────────┼────────────────┼────────────────────────────────┤
+│ Storage        │ localhost:9199 │ http://localhost:4000/storage  │
+└────────────────┴────────────────┴────────────────────────────────┘
+  Emulator Hub running at localhost:4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
