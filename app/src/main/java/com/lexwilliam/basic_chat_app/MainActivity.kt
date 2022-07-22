@@ -1,5 +1,6 @@
 package com.lexwilliam.basic_chat_app
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
@@ -19,15 +20,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
         auth = Firebase.auth
         analytics = Firebase.analytics
 
         if (auth.currentUser == null) {
-            navController.navigate(R.id.signInFragment)
-        } else {
-            navController.navigate(R.id.homeFragment)
+            val intent = Intent(this, SignInActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
@@ -41,12 +40,11 @@ class MainActivity : AppCompatActivity() {
             Firebase.storage.useEmulator("10.0.2.2", 9199)
         }
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
-
         auth = Firebase.auth
         if (auth.currentUser == null) {
-            navController.navigate(R.id.signInFragment)
+            val intent = Intent(this, SignInActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         analytics = Firebase.analytics
