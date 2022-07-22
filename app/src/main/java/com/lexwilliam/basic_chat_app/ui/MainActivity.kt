@@ -1,9 +1,8 @@
-package com.lexwilliam.basic_chat_app
+package com.lexwilliam.basic_chat_app.ui
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.NavHostFragment
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
@@ -12,7 +11,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import com.lexwilliam.basic_chat_app.databinding.ActivityMainBinding
+import com.lexwilliam.basic_chat_app.BuildConfig
+import com.lexwilliam.basic_chat_app.R
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth

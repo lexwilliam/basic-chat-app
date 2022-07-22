@@ -1,4 +1,4 @@
-package com.lexwilliam.basic_chat_app
+package com.lexwilliam.basic_chat_app.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.lexwilliam.basic_chat_app.R
 import com.lexwilliam.basic_chat_app.databinding.ActivitySignInBinding
 import timber.log.Timber
 

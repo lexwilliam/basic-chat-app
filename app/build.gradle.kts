@@ -61,4 +61,7 @@ dependencies {
 
     // Timber
     implementation("com.jakewharton.timber:timber:5.0.1")
+
+    // Glide
+    implementation("com.github.bumptech.glide:glide:4.13.2")
 }
