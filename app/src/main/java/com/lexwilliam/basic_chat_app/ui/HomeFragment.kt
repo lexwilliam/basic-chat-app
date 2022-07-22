@@ -1,5 +1,6 @@
 package com.lexwilliam.basic_chat_app.ui
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,14 +13,16 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.lexwilliam.basic_chat_app.FriendlyMessage
-import com.lexwilliam.basic_chat_app.MyScrollToBottomObserver
-import com.lexwilliam.basic_chat_app.R
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
+import com.lexwilliam.basic_chat_app.*
 import com.lexwilliam.basic_chat_app.adapter.FriendlyMessageAdapter
 import com.lexwilliam.basic_chat_app.databinding.FragmentHomeBinding
+import timber.log.Timber
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -29,6 +32,10 @@ class HomeFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseDatabase
     private lateinit var adapter: FriendlyMessageAdapter
+
+    private val openDocument = registerForActivityResult(MyOpenDocumentContract()) { uri ->
+        onImageSelected(uri!!)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,17 +63,71 @@ class HomeFragment : Fragment() {
             MyScrollToBottomObserver(binding.messageRecyclerView, adapter, manager)
         )
 
+        binding.messageEditText.addTextChangedListener(MyButtonObserver(binding.sendButton))
+        binding.sendButton.setOnClickListener {
+            val friendlyMessage = FriendlyMessage(
+                binding.messageEditText.text.toString(),
+                getUserName(),
+                getPhotoUrl(),
+                null
+            )
+            db.reference.child(MESSAGES_CHILD).push().setValue(friendlyMessage)
+            binding.messageEditText.setText("")
+        }
+
+        binding.addMessageImageView.setOnClickListener {
+            openDocument.launch(arrayOf("image/*"))
+        }
+
         return binding.root
     }
 
-    override fun onPause() {
-        adapter.stopListening()
-        super.onPause()
+    private fun onImageSelected(uri: Uri) {
+        Timber.d("Uri: $uri")
+        val user = auth.currentUser
+        val tempMessage = FriendlyMessage(null, getUserName(), getPhotoUrl(), LOADING_IMAGE_URL)
+        db.reference
+            .child(MESSAGES_CHILD)
+            .push()
+            .setValue(
+                tempMessage,
+                DatabaseReference.CompletionListener { databaseError, databaseReference ->
+                    if (databaseError != null) {
+                        Timber.w("Unable to write message to database.")
+                        Timber.w(databaseError.toException())
+                    }
+                    val key = databaseReference.key
+                    val storageReference = Firebase.storage
+                        .getReference(user!!.uid)
+                        .child(key!!)
+                        .child(uri.lastPathSegment!!)
+                    putImageInStorage(storageReference, uri, key)
+                }
+            )
+
     }
 
-    override fun onResume() {
-        super.onResume()
-        adapter.startListening()
+    private fun putImageInStorage(storageReference: StorageReference, uri: Uri, key: String?) {
+        // First upload the image to Cloud Storage
+        storageReference.putFile(uri)
+            .addOnSuccessListener(
+                requireActivity()
+            ) { taskSnapshot -> // After the image loads, get a public downloadUrl for the image
+                // and add it to the message.
+                taskSnapshot.metadata!!.reference!!.downloadUrl
+                    .addOnSuccessListener { uri ->
+                        val friendlyMessage =
+                            FriendlyMessage(null, getUserName(), getPhotoUrl(), uri.toString())
+                        db.reference
+                            .child(MESSAGES_CHILD)
+                            .child(key!!)
+                            .setValue(friendlyMessage)
+                    }
+            }
+            .addOnFailureListener(requireActivity()) { e ->
+                Timber.w("Image upload task was unsuccessful.")
+                Timber.w(e.toString())
+            }
     }
 
     private fun getPhotoUrl(): String? {
@@ -81,6 +142,16 @@ class HomeFragment : Fragment() {
         } else ANONYMOUS
     }
 
+    override fun onPause() {
+        adapter.stopListening()
+        super.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        adapter.startListening()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -89,5 +160,6 @@ class HomeFragment : Fragment() {
     companion object {
         const val MESSAGES_CHILD = "messages"
         const val ANONYMOUS = "anonymous"
+        private const val LOADING_IMAGE_URL = "https://www.google.com/images/spin-32.gif"
     }
 }
